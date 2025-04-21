@@ -8,13 +8,13 @@ const handleOpen = (key: string, keyPath: string[]) => {
 
 <template>
   <el-container style="height: 100vh;">
-    <el-header style="height: 50px;">Header</el-header>
+    <el-header style="height: 50px; display: flex; align-items: center;">Ceph Web</el-header>
     <el-container>
       <el-aside width="200px">
         <el-menu
           :router="true"
           default-active="/index"
-          @open="handleOpen">
+          @select="handleOpen">
           <el-menu-item index="/index">
             <span>概览</span>
           </el-menu-item>
