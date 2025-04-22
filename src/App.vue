@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import router from '@/router'
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-
+// 过滤出需要显示在菜单中的路由
+const menuRoutes = router.getRoutes().filter(r => r.meta?.showInMenu !== false)
 </script>
 
 <template>
@@ -12,15 +11,29 @@ const handleOpen = (key: string, keyPath: string[]) => {
     <el-container>
       <el-aside width="200px">
         <el-menu
-          :router="true"
-          default-active="/index"
-          @select="handleOpen">
-          <el-menu-item index="/index">
-            <span>概览</span>
-          </el-menu-item>
-          <el-menu-item index="/mon">
-            <span>Monitor</span>
-          </el-menu-item>
+          default-active="/"
+          router>
+          <template v-for="route in menuRoutes" :key="route.path">
+            <!-- 没有子路由的菜单项 -->
+            <el-menu-item 
+              v-if="!route.children.length"
+              :index="route.path">
+              {{ route.meta?.title || route.name }}
+            </el-menu-item>
+            
+            <!-- 有子路由的菜单项 -->
+            <el-sub-menu 
+              v-else
+              :index="route.path">
+              <template #title>{{ route.meta?.title || route.name }}</template>
+              <el-menu-item
+                v-for="child in route.children"
+                :key="child.path"
+                :index="route.path + '/' + child.path">
+                {{ child.meta?.title || child.name }}
+              </el-menu-item>
+            </el-sub-menu>
+          </template>
         </el-menu>
       </el-aside>
       <el-main>
