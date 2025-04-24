@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import OperateDialog from '@/components/OperateDialog.vue'
 import { ADD_LABEL, ADD_VALUE } from '@/constants/operation'
+import AddForm from './AddForm.vue'
 import { ref } from 'vue'
 
-let tableData = ref([
+const tableData = ref([
   {
     date: '2016-05-03',
     name: 'Tom',
@@ -31,8 +33,16 @@ const single_selects = [
 ]
 const singleEvent = (value: string) => {
   if (value === ADD_VALUE) {
-    
+    add_dialog_visible.value = true
   }
+}
+
+// 添加操作
+const add_dialog_visible = ref(false)
+const add_form = ref(null)
+const confirm = () => {
+  if (!add_form.value) return
+    console.log(add_form.value.form)
 }
 </script>
 
@@ -46,6 +56,16 @@ const singleEvent = (value: string) => {
       :columns="columns"
       :operates="['添加', '删除']">
     </Table>
+
+    <!-- 添加弹窗 -->
+    <OperateDialog
+      v-model:visible="add_dialog_visible"
+      :operate_name="ADD_LABEL"
+      :confirm="confirm">
+      <template #content>
+        <AddForm ref="add_form"></AddForm>
+      </template>
+      </OperateDialog>
 </template>
 
 <style scoped>
