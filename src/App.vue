@@ -57,5 +57,7 @@ const menuRoutes = router.getRoutes().filter(r => r.meta?.showInMenu !== false)
 .el-main {
   background-color: #E9EEF3;
   color: #333;
+  --el-main-padding: 6px;
+  padding-top: 1px;
 }
 </style>

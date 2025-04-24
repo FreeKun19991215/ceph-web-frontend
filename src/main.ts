@@ -1,5 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import Table from './components/Table.vue'
+import Title from './components/Title.vue'
+import Multifunction from './components/Multifunction.vue'
 
-createApp(App).use(router).mount('#app')
+
+const app = createApp(App)
+app.use(router)
+app.component('Table', Table)
+app.component('Title', Title)
+app.component('Multifunction', Multifunction)
+app.mount('#app')

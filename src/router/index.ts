@@ -18,6 +18,25 @@ const routes: RouteRecordRaw[] = [
       showInMenu: true
     }
   },
+  {
+    path: "/hardware",
+    name: "Hardware",
+    meta: {
+      title: "硬件信息",
+      showInMenu: true
+    },
+    children: [
+      {
+        path: "server",
+        name: "Server",
+        component: () => import("@/views/Hardware/Server/Server.vue"),
+        meta: {
+          title: "服务器",
+          showInMenu: false
+        }
+      }
+    ]
+  },
 ];
 
 const router = createRouter({
