@@ -3,25 +3,11 @@ import OperateDialog from '@/components/OperateDialog.vue'
 import { ADD_LABEL, ADD_VALUE } from '@/constants/operation'
 import AddForm from './AddForm.vue'
 import { ref } from 'vue'
+import { addServer } from '@/api/modules/hardware/server'
 
-const tableData = ref([
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-    status: '1',
-    roles: ["1", "2", "1", "1", "1"]
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-    status: "1",
-    roles: ["1"]
-  }
-])
+const tableData = ref()
 const columns = [
-  {'prop': "date", "label": "日期", "width": "120"},
+  {'prop': "hostname", "label": "主机名", "width": "120"},
   {'prop': "name", "label": "名称", "width": "80"},
   {'prop': "address", "label": "地址"},
   {'prop': "status", "label": "状态", "style": "status"},
@@ -40,9 +26,11 @@ const singleEvent = (value: string) => {
 // 添加操作
 const add_dialog_visible = ref(false)
 const add_form = ref(null)
-const confirm = () => {
+const add_confirm = async () => {
   if (!add_form.value) return
     console.log(add_form.value.form)
+    const res = await addServer(add_form.value.form)
+    console.log(res)
 }
 </script>
 
@@ -61,7 +49,7 @@ const confirm = () => {
     <OperateDialog
       v-model:visible="add_dialog_visible"
       :operate_name="ADD_LABEL"
-      :confirm="confirm">
+      :confirm="add_confirm">
       <template #content>
         <AddForm ref="add_form"></AddForm>
       </template>

@@ -9,7 +9,7 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const value1 = '单选操作'
+const single_name = '单选操作'
 const selectChange = (value: string) => {
   if (props.singleEvent) {
     props.singleEvent(value)
@@ -21,7 +21,7 @@ const selectChange = (value: string) => {
   <div style="margin-bottom: 8px;">
     <el-select
       v-if="single_selects?.length"
-      v-model="value1"
+      v-model="single_name"
       @change="selectChange"
       style="width: 100px;">
       <el-option

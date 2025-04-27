@@ -2,11 +2,11 @@
 import { reactive } from 'vue';
 
 const form = reactive({
-  address: '',  // ip 地址
+  ip_address: '',  // ip 地址
   password: '',  // 密码
 })
 const rules = {
-  address: [
+  ip_address: [
     { 
       required: true, 
       message: '请输入', 
@@ -28,8 +28,8 @@ defineExpose({form})
 <template>
   <div style="margin-left: 20px; margin-right: 20px;">
     <el-form :model="form" label-width="auto" :rules="rules">
-      <el-form-item label="ip 地址" prop="address">
-        <el-input v-model="form.address" />
+      <el-form-item label="ip 地址" prop="ip_address">
+        <el-input v-model="form.ip_address" />
       </el-form-item>
       <el-form-item label="临时密码" prop="password">
         <el-input v-model="form.password" />

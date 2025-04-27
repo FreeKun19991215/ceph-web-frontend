@@ -1,4 +1,4 @@
-export interface LoginParams {
-    username: string
+export interface AddParams {
+    ip_address: string
     password: string
 }

@@ -1,9 +1,7 @@
 import http from '@/api/request'
+import type { AddParams } from '@/api/types/hardware/server'
+import { PREFIX, type OperateResInfo } from '@/api/types/common'
 
-// import type {
-//     LoginParams,
-//   } from '../types/user'
-
-export const getList = () => {
-  return http.get('/hardware/server')
+export const addServer = (data: AddParams) => {
+  return http.post<OperateResInfo>(PREFIX + '/server/', data)
 }

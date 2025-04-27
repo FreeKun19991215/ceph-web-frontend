@@ -20,7 +20,6 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 3000
   },
-
   // 帮助 vue 识别 @/ 为 src/
   resolve: {
     alias: {
